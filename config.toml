@@ -1,0 +1,111 @@
+[mode]
+# mode: generate new data file or plot data from an existing data file
+    # generate - generate new data file
+    # plot - plot the data from a data fie
+mode = 'plot'
+
+
+[files]
+# data_file_name: name of the data file to be used for plotting
+data_file_name = 'cnumbers.db'
+
+# reset_output_data: whether the output folder should be emptied before stashing the new html file
+reset_output_data = false
+
+
+[data]
+lower_bound = 1
+upper_bound = 100000
+
+# include_backbone: whether the backbone numbers are to be plotted
+include_backbone = false
+
+
+[run]
+# logger_level: the level of details to be included in the log
+    # ERROR, INFO, DEBUG
+logger_level = 'DEBUG'
+
+# hard_copy_timestamp_granularity: the datetime information to be included in the filenames of the html, csv and log files
+    # include tatetime data up to index, inclusive
+    # ['%d%m%Y', '_%H', '%M', '%S']
+hard_copy_timestamp_granularity = 3
+
+
+[plot]
+# width, height: size of teh plot
+width = 1600
+height = 900
+
+# y_axis: number attribute to be plotted
+    # distance
+    # distance to bb
+    # vertebrae
+    # peak
+    # peak slope
+y_axis = 'distance to bb'
+
+# palette: bokeh color scheme for the plot
+    # Magma, Inferno, Plasma, Viridis, Cividis, Turbo, Category10, Dark2
+    # https://docs.bokeh.org/en/latest/docs/reference/palettes.html
+palette = 'Turbo'
+
+# point_size: point size for the plot
+point_size = 3
+
+# palette_range: maximum number of colors to be used
+    # limited by the palette
+    # https://docs.bokeh.org/en/latest/docs/reference/palettes.html
+palette_range = 11
+
+# colorization_value: number attribute to be used for colorization
+    # distance
+    # distance to bb
+    # value
+    # vertebrae
+    # peak
+    # peak slope
+    # odd parent
+colorization_value = 'vertebrae'
+
+
+[filters]
+filter_data = false
+
+# FilterManager.FilterType enum values
+# LTE = 1
+# GTE = 2
+# RNG = 3
+# LST = 4
+# EQL = 5
+
+            # eq for ==
+            # lt for <
+            # ge for >=
+            # in for in_
+            # like for like
+
+filter_name = 'is_bounded'
+filter_type = 5
+filter_polarity = true
+filter_column = 'bounded'
+filter_parameters = ["True"]
+
+
+# filter_name = 'has_odd_parent'
+# filter_type = 1
+# filter_polarity = true
+# filter_column = 'odd_parent'
+# filter_parameters = [true]
+
+# filter_name = 'dist_gt_10'
+# filter_type = 2
+# filter_polarity = false
+# filter_column = 'dist'
+# filter_parameters = [10]
+
+# filter_name = 'is_bounded'
+# filter_type = 5
+# filter_polarity = true
+# filter_column = 'bounded'
+# filter_parameters = ["True"]

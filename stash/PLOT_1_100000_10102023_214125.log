@@ -1,0 +1,16 @@
+2023-10-10 21:41:25,363 - INFO - Start at 2023-10-10 21:41:25.363883
+2023-10-10 21:41:25,364 - INFO - * Run mode: PLOT
+2023-10-10 21:41:25,364 - INFO - * Data range: 1 to 100000
+2023-10-10 21:41:25,365 - INFO - Loading data
+2023-10-10 21:41:25,365 - DEBUG - Getting data filename
+2023-10-10 21:41:25,365 - DEBUG - Loading data from file
+2023-10-10 21:41:27,668 - INFO - Preparing data
+2023-10-10 21:41:34,247 - DEBUG - Plot data set
+2023-10-10 21:41:34,248 - INFO - Data ratio: 0.999829998299983
+2023-10-10 21:41:34,248 - DEBUG - Graph params collated
+2023-10-10 21:41:34,248 - DEBUG - Tooltips set
+2023-10-10 21:41:34,249 - DEBUG - Color factors set
+2023-10-10 21:41:34,805 - INFO - Plot generated
+2023-10-10 21:41:37,136 - INFO - Displaying plot
+2023-10-10 21:41:37,137 - INFO - End at 2023-10-10 21:41:37.137282
+2023-10-10 21:41:37,137 - INFO - Total time: 0:00:11.773399
