@@ -79,12 +79,6 @@ filter_data = false
 # LST = 4
 # EQL = 5
 
-            # eq for ==
-            # lt for <
-            # ge for >=
-            # in for in_
-            # like for like
-
 filter_name = 'is_bounded'
 filter_type = 5
 filter_polarity = true

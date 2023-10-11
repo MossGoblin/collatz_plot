@@ -25,8 +25,9 @@ def init_log(logger: Logger, config: ConfigAgent, start: datetime.time):
 
 def get_data(logger: Logger, config: ConfigAgent, data_manager: DataManager) -> pd.DataFrame:
     logger.debug('Loading data from file')
-    data_list = data_manager.load_filtered_data(config)
-    data_df = cnumber_list_to_df(data_list)
+    data_df = data_manager.load_data(config)
+    # TBD
+    # data_df = cnumber_list_to_df(data_list)
     if config.filters.filter_data:
          logger.info(f'Filtering data: {config.filters.filter_name}')
          data_df = filter_data(config, data_df)

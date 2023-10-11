@@ -5,8 +5,6 @@ from toolbox.lab import (
     generate_hard_copy_filename,
     generate_plot,
     get_data,
-    filter_data,
-    set_clamp_filter,
     init_log,
     prep_output_folder,
     prepare_data,
@@ -31,12 +29,6 @@ def run(logger, config, data_manager):
     # prepare data for plot
     logger.info('Preparing data')
     data = prepare_data(config, data, upper_bound)
-
-    # filter data
-    # if config.filters.filter_data:
-    #     logger.info(f'Filtering data: {config.filters.filter_name}')
-    #     data = filter_data(config, data)
-    #     config.add_parameter('local', 'filter_name', config.filters.filter_name)
 
     # plot data
     html_filepath = config.local.html_filepath

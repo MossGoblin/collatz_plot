@@ -1,9 +1,8 @@
 from enum import Enum, auto
 from sqlalchemy import create_engine, Column, Integer, Boolean, Float, String
-from sqlalchemy.orm import sessionmaker, Query
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 from progress.bar import Bar
-from pytoolbox.config_agent import ConfigAgent
 
 import pandas as pd
 
@@ -26,6 +25,8 @@ RNG = auto() within range (inclusive); polarity changes to outside of range (exc
 LST = auto() in a list; polarity changes to not in a list
 EQL = auto() equals; polarity changes to not equals
 
+alternative filtering at 
+# LINK https://www.peterspython.com/en/blog/slqalchemy-dynamic-query-building-and-filtering-including-soft-deletes
 '''
 
 
@@ -63,7 +64,7 @@ class CNumber(Base):
 
 
 class DataManager():
-
+    '''Governs the persistence and filtering of data'''
     class FilterType(Enum):
         LTE = auto()
         GTE = auto()
@@ -79,41 +80,51 @@ class DataManager():
         self.filters = []
 
 
-    def save_data(self, data):
-         Base.metadata.create_all(bind=self.engine)
-         Session = sessionmaker(bind=self.engine)
-         session = Session()
-         data_list = data.to_dict(orient="records")
-         with Bar('Adding records to db', max=len(data_list)) as bar:
-             for record in data_list:
-                 test_cnumber = CNumber(record)
-                 session.add(test_cnumber)
-                 bar.next()        
-         session.commit()
+    def save_data(self, data: pd.DataFrame):
+        '''Saves the data via sqlalchemy'''
+        Base.metadata.create_all(bind=self.engine)
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        data_list = data.to_dict(orient="records")
+        with Bar('Adding records to db', max=len(data_list)) as bar:
+            for record in data_list:
+                test_cnumber = CNumber(record)
+                session.add(test_cnumber)
+                bar.next()        
+        session.commit()
         
 
-    def load_data(self, lowerbound, upperbound):
+    def load_data(self, config):
+        '''Loads data, clamped with lowerbound and upperbound'''
+        lowerbound = config.local.lower_bound
+        upperbound = config.local.upper_bound
         raw_df = pd.read_sql(self.session.query(CNumber).filter(CNumber.value > lowerbound, CNumber.value <= upperbound).statement, self.session.bind)
         return raw_df
+
 
     def set_data(self, data: pd.DataFrame):
         self.data = data
 
+
     def add_filter(self, filter: dict):
+        '''Add filter to the filter list for later application'''
         try:
             self._validate_filter(filter)
         except Exception as e:
             raise e
         self.filters.append(filter)
 
+
     def list_filters(self):
+        '''Get list of all filters'''
         filter_names = []
         for filter in self.filters:
             filter_names.append(filter['name'])
         return filter_names
 
+
     def apply_filter(self, filter_name: str):
-        # active_filter = [filter for index, filter in enumerate(self.filters) if filter["name"] == filter_name][0]
+        '''Apply previously added filter, specified by name'''
         active_filter = [filter for filter in self.filters if filter["name"] == filter_name][0]
         # check for column name
         column_name = active_filter['column']
@@ -149,7 +160,6 @@ class DataManager():
 
 
     def _validate_filter(self, filter: dict):
-        pass
         for key_name in ['name', 'type', 'polarity', 'column', 'parameters']:
             if filter.get(key_name) is None:
                 raise ValueError(f'Filter "{key_name}" is missing')
@@ -182,73 +192,3 @@ class DataManager():
 
         return True
 
-    def load_filtered_data(self, config: ConfigAgent):
-        # LINK https://www.peterspython.com/en/blog/slqalchemy-dynamic-query-building-and-filtering-including-soft-deletes
-        clamp_filter_list = []
-        clamp_filter_list.append((CNumber, 'value', 'ge', config.local.lower_bound))
-        clamp_filter_list.append((CNumber, 'value', 'lt', config.local.upper_bound))
-        loaded_data = self.db_select(
-            model_class=CNumber, 
-            filter_list=[
-                (CNumber, 'value', 'ge', config.local.lower_bound),
-                (CNumber, 'value', 'lt', config.local.upper_bound),                 
-            ]
-        ).all()
-
-        return loaded_data
-    
-
-    def db_select(self, model_class = None, filter_list = None):
-        if filter_list == None:
-            filter_list = []
-
-        if not isinstance(filter_list, list):
-            raise Exception('filter_by_list not list')
-
-        # collector for model_classes
-        model_classes = []
-        # collector for columns
-        columns = []
-        if isinstance(model_class, tuple):
-            model_class, column = model_class
-            column = getattr(model_class, column, None)
-            columns.append(column)
-            model_classes.append(model_class)
-        else:
-            columns.append(model_class)
-            model_classes.append(model_class)
-        query = Query(columns)
-
-
-        # filter_by_items
-        for filter_by_item in filter_list:
-            try:
-                model_class, column, op, value = filter_by_item
-            except ValueError:
-                raise Exception('Invalid filter_by_item: %s' % filter_by_item)
-
-            column = getattr(model_class, column, None)
-            if not column:
-                raise Exception('Invalid filter column: %s' % column)
-
-            if op == 'in':
-                if isinstance(value, list):
-                    filter_by = column.in_(value)
-                else:
-                    filter_by = column.in_(value.split(','))
-            else:
-                try:
-                    attr = list(filter(
-                        lambda e: hasattr(column, e % op),
-                        ['%s', '%s_', '__%s__']
-                    ))[0] % op
-                except IndexError:
-                    raise Exception('Invalid filter operator: %s' % op)
-
-                if value == 'null':
-                    value = None
-                filter_by = getattr(column, attr)(value)
-            query = query.filter(filter_by)
-
-        result = query.with_session(self.session)
-        return result

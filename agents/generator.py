@@ -146,8 +146,6 @@ def run(logger, config, data_manager):
     logger.info('Saving dataframe to csv')
     collection_df = pd.DataFrame.from_dict(cnumber_collection)
     collection_df.drop(columns=['target', 'tail', 'tail_path'], inplace=True)
-    # start_string = start.strftime("%d%m%Y_%H%M%S")
-    # data_filename = "_".join([str(upper_bound), start_string]) + ".db"
     data_filename = config.files.data_file_name
     data_folder = config.local.data_folder
     data_filepath = os.path.join(data_folder, data_filename)
