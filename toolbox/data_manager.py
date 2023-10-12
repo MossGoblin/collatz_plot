@@ -32,8 +32,8 @@ alternative filtering at
 
 class CNumber(Base):
     __tablename__ = "cnumbers"
-    uid = Column("uid", Integer, primary_key=True, autoincrement=True)
-    value = Column("value", Integer)
+    # uid = Column("uid", Integer, primary_key=True, autoincrement=True)
+    value = Column("value", Integer, primary_key=True)
     is_bb = Column("is_bb", Boolean)
     full_path = Column("full_path", String)
     dist = Column("dist", Integer)
@@ -80,6 +80,14 @@ class DataManager():
         self.filters = []
 
 
+    def data_already_exists(self, config):
+        lower_bound = config.local.lower_bound
+        upper_bound = config.local.upper_bound - 1
+        if len(self.load_data(config)) < upper_bound - lower_bound:
+            return False
+        return True
+
+
     def save_data(self, data: pd.DataFrame):
         '''Saves the data via sqlalchemy'''
         Base.metadata.create_all(bind=self.engine)
@@ -89,7 +97,7 @@ class DataManager():
         with Bar('Adding records to db', max=len(data_list)) as bar:
             for record in data_list:
                 test_cnumber = CNumber(record)
-                session.add(test_cnumber)
+                session.merge(test_cnumber)
                 bar.next()        
         session.commit()
         

@@ -1,0 +1,107 @@
+2023-10-12 09:30:52,533 - INFO - Start at 2023-10-12 09:30:52.533868
+2023-10-12 09:30:52,534 - INFO - * Run mode: GENERATE
+2023-10-12 09:30:52,534 - INFO - * Data range: 1 to 100
+2023-10-12 09:30:52,534 - INFO - * Process count: 8
+2023-10-12 09:30:52,534 - INFO - Creating proto collection...
+2023-10-12 09:30:52,535 - DEBUG - ...done in 0:00:00
+2023-10-12 09:30:52,535 - INFO - Calculating first tails...
+2023-10-12 09:30:55,136 - DEBUG - ...done in 0:00:02.600994
+2023-10-12 09:30:55,140 - INFO - Creating backbone...
+2023-10-12 09:30:58,135 - DEBUG - ...done in 0:00:02.994378
+2023-10-12 09:30:58,140 - INFO - Collating full paths...
+2023-10-12 09:30:58,163 - DEBUG - ...done in 0:00:00.009012
+2023-10-12 09:30:58,163 - INFO - Calculating parameters...
+2023-10-12 09:31:01,107 - DEBUG - ...done in 0:00:02.942983
+2023-10-12 09:31:01,109 - INFO - Saving dataframe to csv
+2023-10-12 09:31:01,145 - ERROR - We ran into a problem: (sqlite3.IntegrityError) UNIQUE constraint failed: cnumbers.value
+[SQL: INSERT INTO cnumbers (value, is_bb, full_path, dist, dist_to_bb, closest_vert_value, closest_vert, peak, peak_slope, odd_parent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: [(29, 0, '88,44,22,11,34,17,52,26,13,40,20,10,5,16,8,4,2,1', 18, 14, 16, 4, 88, 3.0344827586206895, 0), (30, 0, '15,46,23,70,35,106,53,160,80,40,20,10,5,16,8,4,2,1', 18, 14, 16, 4, 160, 5.333333333333333, 0), (31, 0, '94,47,142,71,214,107,322,161,484,242,121,364,182,91,274,137,412,206,103,310,155,466,233,700,350,175,526,263,790,395,1186,593,1780,890,445,1336,668,33 ... (126 characters truncated) ... ,1367,4102,2051,6154,3077,9232,4616,2308,1154,577,1732,866,433,1300,650,325,976,488,244,122,61,184,92,46,23,70,35,106,53,160,80,40,20,10,5,16,8,4,2,1', 106, 102, 16, 4, 9232, 297.80645161290323, 0), (32, 1, '16,8,4,2,1', 5, 0, 32, 5, 32, 1.0, 0), (33, 0, '100,50,25,76,38,19,58,29,88,44,22,11,34,17,52,26,13,40,20,10,5,16,8,4,2,1', 26, 22, 16, 4, 100, 3.0303030303030303, 0), (34, 0, '17,52,26,13,40,20,10,5,16,8,4,2,1', 13, 9, 16, 4, 52, 1.5294117647058822, 1), (35, 0, '106,53,160,80,40,20,10,5,16,8,4,2,1', 13, 9, 16, 4, 160, 4.571428571428571, 0), (36, 0, '18,9,28,14,7,22,11,34,17,52,26,13,40,20,10,5,16,8,4,2,1', 21, 17, 16, 4, 52, 1.4444444444444444, 0)  ... displaying 10 of 98 total bound parameter sets ...  (55, 0, '166,83,250,125,376,188,94,47,142,71,214,107,322,161,484,242,121,364,182,91,274,137,412,206,103,310,155,466,233,700,350,175,526,263,790,395,1186,593,1 ... (149 characters truncated) ... ,1367,4102,2051,6154,3077,9232,4616,2308,1154,577,1732,866,433,1300,650,325,976,488,244,122,61,184,92,46,23,70,35,106,53,160,80,40,20,10,5,16,8,4,2,1', 112, 108, 16, 4, 9232, 167.85454545454544, 0), (56, 0, '28,14,7,22,11,34,17,52,26,13,40,20,10,5,16,8,4,2,1', 19, 15, 16, 4, 56, 1.0, 0)]]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\engine\base.py", line 1934, in _exec_single_context
+    self.dialect.do_executemany(
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\engine\default.py", line 918, in do_executemany
+    cursor.executemany(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: cnumbers.value
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\[ CODEE ]\[ GITTED ]\collatz_plot\main.py", line 57, in main
+    run_generator(logger, config, data_manager)
+  File "D:\[ CODEE ]\[ GITTED ]\collatz_plot\agents\generator.py", line 153, in run
+    data_manager.save_data(collection_df)
+  File "D:\[ CODEE ]\[ GITTED ]\collatz_plot\toolbox\data_manager.py", line 94, in save_data
+    session.commit()
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\session.py", line 1923, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\session.py", line 1239, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\session.py", line 1214, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\session.py", line 4179, in flush
+    self._flush(objects)
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\session.py", line 4314, in _flush
+    with util.safe_reraise():
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\session.py", line 4275, in _flush
+    flush_context.execute()
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1043, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\engine\base.py", line 1412, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\engine\base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\engine\base.py", line 1984, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\engine\base.py", line 1934, in _exec_single_context
+    self.dialect.do_executemany(
+  File "C:\Users\hugol\miniconda3\envs\collatz\Lib\site-packages\sqlalchemy\engine\default.py", line 918, in do_executemany
+    cursor.executemany(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: cnumbers.value
+[SQL: INSERT INTO cnumbers (value, is_bb, full_path, dist, dist_to_bb, closest_vert_value, closest_vert, peak, peak_slope, odd_parent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: [(29, 0, '88,44,22,11,34,17,52,26,13,40,20,10,5,16,8,4,2,1', 18, 14, 16, 4, 88, 3.0344827586206895, 0), (30, 0, '15,46,23,70,35,106,53,160,80,40,20,10,5,16,8,4,2,1', 18, 14, 16, 4, 160, 5.333333333333333, 0), (31, 0, '94,47,142,71,214,107,322,161,484,242,121,364,182,91,274,137,412,206,103,310,155,466,233,700,350,175,526,263,790,395,1186,593,1780,890,445,1336,668,33 ... (126 characters truncated) ... ,1367,4102,2051,6154,3077,9232,4616,2308,1154,577,1732,866,433,1300,650,325,976,488,244,122,61,184,92,46,23,70,35,106,53,160,80,40,20,10,5,16,8,4,2,1', 106, 102, 16, 4, 9232, 297.80645161290323, 0), (32, 1, '16,8,4,2,1', 5, 0, 32, 5, 32, 1.0, 0), (33, 0, '100,50,25,76,38,19,58,29,88,44,22,11,34,17,52,26,13,40,20,10,5,16,8,4,2,1', 26, 22, 16, 4, 100, 3.0303030303030303, 0), (34, 0, '17,52,26,13,40,20,10,5,16,8,4,2,1', 13, 9, 16, 4, 52, 1.5294117647058822, 1), (35, 0, '106,53,160,80,40,20,10,5,16,8,4,2,1', 13, 9, 16, 4, 160, 4.571428571428571, 0), (36, 0, '18,9,28,14,7,22,11,34,17,52,26,13,40,20,10,5,16,8,4,2,1', 21, 17, 16, 4, 52, 1.4444444444444444, 0)  ... displaying 10 of 98 total bound parameter sets ...  (55, 0, '166,83,250,125,376,188,94,47,142,71,214,107,322,161,484,242,121,364,182,91,274,137,412,206,103,310,155,466,233,700,350,175,526,263,790,395,1186,593,1 ... (149 characters truncated) ... ,1367,4102,2051,6154,3077,9232,4616,2308,1154,577,1732,866,433,1300,650,325,976,488,244,122,61,184,92,46,23,70,35,106,53,160,80,40,20,10,5,16,8,4,2,1', 112, 108, 16, 4, 9232, 167.85454545454544, 0), (56, 0, '28,14,7,22,11,34,17,52,26,13,40,20,10,5,16,8,4,2,1', 19, 15, 16, 4, 56, 1.0, 0)]]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2023-10-12 10:00:50,571 - INFO - Start at 2023-10-12 10:00:50.571766
+2023-10-12 10:00:50,571 - INFO - * Run mode: GENERATE
+2023-10-12 10:00:50,572 - INFO - * Data range: 1 to 100
+2023-10-12 10:00:50,572 - INFO - * Process count: 8
+2023-10-12 10:00:50,572 - INFO - Creating proto collection...
+2023-10-12 10:00:50,572 - DEBUG - ...done in 0:00:00
+2023-10-12 10:00:50,573 - INFO - Calculating first tails...
+2023-10-12 10:00:53,103 - DEBUG - ...done in 0:00:02.530237
+2023-10-12 10:00:53,110 - INFO - Creating backbone...
+2023-10-12 10:00:55,919 - DEBUG - ...done in 0:00:02.808490
+2023-10-12 10:00:55,920 - INFO - Collating full paths...
+2023-10-12 10:00:55,928 - DEBUG - ...done in 0:00:00.007978
+2023-10-12 10:00:55,928 - INFO - Calculating parameters...
+2023-10-12 10:00:58,683 - DEBUG - ...done in 0:00:02.754634
+2023-10-12 10:00:58,695 - INFO - Saving dataframe to csv
+2023-10-12 10:00:58,973 - INFO - End at 2023-10-12 10:00:58.973278
+2023-10-12 10:00:58,973 - INFO - Total time: 0:00:08.401512

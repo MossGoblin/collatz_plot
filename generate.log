@@ -1,0 +1,7 @@
+2023-10-12 10:13:28,645 - INFO - Start at 2023-10-12 10:13:28.645140
+2023-10-12 10:13:28,646 - INFO - * Run mode: GENERATE
+2023-10-12 10:13:28,646 - INFO - * Data range: 50 to 250
+2023-10-12 10:13:28,646 - INFO - * Process count: 8
+2023-10-12 10:13:28,654 - INFO - The data range is already covered in the db. No new data will be generated
+2023-10-12 10:13:28,655 - INFO - End at 2023-10-12 10:13:28.654008
+2023-10-12 10:13:28,655 - INFO - Total time: 0:00:00.008868

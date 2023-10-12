@@ -1,0 +1,27 @@
+2023-10-12 10:11:02,694 - INFO - The data range is already covered in the db. No new data will be generated
+2023-10-12 10:11:03,201 - INFO - End at 2023-10-12 10:11:02.258560
+2023-10-12 10:11:05,701 - INFO - Total time: 0:00:06.694863
+2023-10-12 10:12:38,632 - INFO - Start at 2023-10-12 10:12:38.632348
+2023-10-12 10:12:38,632 - INFO - * Run mode: GENERATE
+2023-10-12 10:12:38,632 - INFO - * Data range: 50 to 150
+2023-10-12 10:12:38,633 - INFO - * Process count: 8
+2023-10-12 10:12:38,639 - INFO - The data range is already covered in the db. No new data will be generated
+2023-10-12 10:12:38,640 - INFO - End at 2023-10-12 10:12:38.639327
+2023-10-12 10:12:38,640 - INFO - Total time: 0:00:00.006979
+2023-10-12 10:13:14,120 - INFO - Start at 2023-10-12 10:13:14.120053
+2023-10-12 10:13:14,120 - INFO - * Run mode: GENERATE
+2023-10-12 10:13:14,120 - INFO - * Data range: 50 to 250
+2023-10-12 10:13:14,120 - INFO - * Process count: 8
+2023-10-12 10:13:14,126 - INFO - Creating proto collection...
+2023-10-12 10:13:14,127 - DEBUG - ...done in 0:00:00
+2023-10-12 10:13:14,127 - INFO - Calculating first tails...
+2023-10-12 10:13:16,727 - DEBUG - ...done in 0:00:02.598238
+2023-10-12 10:13:16,740 - INFO - Creating backbone...
+2023-10-12 10:13:19,464 - DEBUG - ...done in 0:00:02.716735
+2023-10-12 10:13:19,476 - INFO - Collating full paths...
+2023-10-12 10:13:19,497 - DEBUG - ...done in 0:00:00.020942
+2023-10-12 10:13:19,498 - INFO - Calculating parameters...
+2023-10-12 10:13:22,491 - DEBUG - ...done in 0:00:02.992997
+2023-10-12 10:13:22,491 - INFO - Saving dataframe to db
+2023-10-12 10:13:22,716 - INFO - End at 2023-10-12 10:13:22.716776
+2023-10-12 10:13:22,716 - INFO - Total time: 0:00:08.596723

@@ -2,7 +2,7 @@
 # mode: generate new data file or plot data from an existing data file
     # generate - generate new data file
     # plot - plot the data from a data fie
-mode = 'plot'
+mode = 'generate'
 
 
 [files]
@@ -14,8 +14,8 @@ reset_output_data = false
 
 
 [data]
-lower_bound = 1
-upper_bound = 100000
+lower_bound = 50
+upper_bound = 250
 
 # include_backbone: whether the backbone numbers are to be plotted
 include_backbone = false

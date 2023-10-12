@@ -1,6 +1,7 @@
 import copy
 import multiprocessing
 import os
+import sys
 from datetime import datetime
 from multiprocessing import Queue
 
@@ -28,6 +29,13 @@ def run(logger, config, data_manager):
     # pr_limit = limit
     init_log(logger, config, start)
     logger.info(f'* Process count: {process_count}')
+
+    if data_manager.data_already_exists(config):
+        end = datetime.now()
+        logger.info(f'The data range is already covered in the db. No new data will be generated')
+        logger.info(f'End at {end}')
+        logger.info(f'Total time: {end-start}')
+        sys.exit(0)
 
     # create proto number collection
     logger.info('Creating proto collection...')
@@ -143,7 +151,7 @@ def run(logger, config, data_manager):
     step_end = datetime.now()
     logger.debug(f'...done in {step_end-step_start}')
 
-    logger.info('Saving dataframe to csv')
+    logger.info('Saving dataframe to db')
     collection_df = pd.DataFrame.from_dict(cnumber_collection)
     collection_df.drop(columns=['target', 'tail', 'tail_path'], inplace=True)
     data_filename = config.files.data_file_name

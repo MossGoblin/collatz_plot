@@ -1,0 +1,17 @@
+2023-10-12 09:30:00,275 - INFO - Start at 2023-10-12 09:30:00.275228
+2023-10-12 09:30:00,276 - INFO - * Run mode: GENERATE
+2023-10-12 09:30:00,276 - INFO - * Data range: 1 to 100
+2023-10-12 09:30:00,276 - INFO - * Process count: 8
+2023-10-12 09:30:00,277 - INFO - Creating proto collection...
+2023-10-12 09:30:00,277 - DEBUG - ...done in 0:00:00
+2023-10-12 09:30:00,277 - INFO - Calculating first tails...
+2023-10-12 09:30:02,877 - DEBUG - ...done in 0:00:02.600103
+2023-10-12 09:30:02,880 - INFO - Creating backbone...
+2023-10-12 09:30:06,043 - DEBUG - ...done in 0:00:03.163539
+2023-10-12 09:30:06,044 - INFO - Collating full paths...
+2023-10-12 09:30:06,065 - DEBUG - ...done in 0:00:00.007978
+2023-10-12 09:30:06,065 - INFO - Calculating parameters...
+2023-10-12 09:30:09,011 - DEBUG - ...done in 0:00:02.946122
+2023-10-12 09:30:09,014 - INFO - Saving dataframe to csv
+2023-10-12 09:30:09,543 - INFO - End at 2023-10-12 09:30:09.542456
+2023-10-12 09:30:09,543 - INFO - Total time: 0:00:09.267228
